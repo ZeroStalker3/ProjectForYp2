@@ -38,5 +38,10 @@ namespace ProjectForYp2.pages
         {
             //ОБновление DataGrid
         }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            FrameApp.frmObj.GoBack();
+        }
     }
 }
