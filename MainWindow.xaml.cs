@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using ProjectForYp2.classes;
+using System.Text;
+using ProjectForYp2.pages;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +21,9 @@ namespace ProjectForYp2
         public MainWindow()
         {
             InitializeComponent();
+            FrameApp.frmObj = MainFrm;
+            FrameApp.frmObj.Navigate(new PageLogin());
+
         }
     }
 }

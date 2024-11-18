@@ -7,8 +7,11 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
         WindowState="Maximized"
+        MinHeight="450" MinWidth="800"
         Title="Главное окно" Height="800" Width="1600">
     <Grid>
-
+        <Frame 
+            x:Name="MainFrm" 
+            NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
