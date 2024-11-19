@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectForYp2.data;
 
@@ -11,9 +12,11 @@ using ProjectForYp2.data;
 namespace ProjectForYp2.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20241119062614_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,33 +24,6 @@ namespace ProjectForYp2.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("ProjectForYp2.Model.Comment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("ClientId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MasterId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
-
-                    b.HasIndex("MasterId");
-
-                    b.ToTable("Comments");
-                });
 
             modelBuilder.Entity("ProjectForYp2.Model.OrgTechType", b =>
                 {
@@ -77,7 +53,7 @@ namespace ProjectForYp2.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly?>("CompletionDate")
+                    b.Property<DateOnly>("CompletionDate")
                         .HasColumnType("date");
 
                     b.Property<int>("Id_OrgTechTypeId")
@@ -98,9 +74,11 @@ namespace ProjectForYp2.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("OrgTechNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("RepairParts")
+                        .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("StartDate")
@@ -192,21 +170,6 @@ namespace ProjectForYp2.Migrations
                     b.HasIndex("TypeId");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("ProjectForYp2.Model.Comment", b =>
-                {
-                    b.HasOne("ProjectForYp2.Model.User", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId");
-
-                    b.HasOne("ProjectForYp2.Model.User", "Master")
-                        .WithMany()
-                        .HasForeignKey("MasterId");
-
-                    b.Navigation("Client");
-
-                    b.Navigation("Master");
                 });
 
             modelBuilder.Entity("ProjectForYp2.Model.Requests", b =>

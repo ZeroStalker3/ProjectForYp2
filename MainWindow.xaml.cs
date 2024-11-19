@@ -1,15 +1,8 @@
-﻿using ProjectForYp2.classes;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjectForYp2.classes;
+using ProjectForYp2.data;
 using ProjectForYp2.pages;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ProjectForYp2
 {
@@ -23,7 +16,6 @@ namespace ProjectForYp2
             InitializeComponent();
             FrameApp.frmObj = MainFrm;
             FrameApp.frmObj.Navigate(new PageLogin());
-
         }
     }
 }

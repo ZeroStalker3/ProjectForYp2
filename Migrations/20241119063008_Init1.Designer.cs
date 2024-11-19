@@ -12,8 +12,8 @@ using ProjectForYp2.data;
 namespace ProjectForYp2.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20241118062708_Init")]
-    partial class Init
+    [Migration("20241119063008_Init1")]
+    partial class Init1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,10 +50,19 @@ namespace ProjectForYp2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
                     b.Property<DateOnly>("CompletionDate")
                         .HasColumnType("date");
 
                     b.Property<int>("Id_OrgTechTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id_StatysId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MasterId")
                         .HasColumnType("int");
 
                     b.Property<string>("OrgTechManufacture")
@@ -76,24 +85,15 @@ namespace ProjectForYp2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("StatysId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserIdId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("masterIdId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("Id_OrgTechTypeId");
 
-                    b.HasIndex("StatysId");
+                    b.HasIndex("Id_StatysId");
 
-                    b.HasIndex("UserIdId");
-
-                    b.HasIndex("masterIdId");
+                    b.HasIndex("MasterId");
 
                     b.ToTable("Requests");
                 });
@@ -174,37 +174,35 @@ namespace ProjectForYp2.Migrations
 
             modelBuilder.Entity("ProjectForYp2.Model.Requests", b =>
                 {
+                    b.HasOne("ProjectForYp2.Model.User", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ProjectForYp2.Model.OrgTechType", "Id_OrgTechType")
                         .WithMany()
                         .HasForeignKey("Id_OrgTechTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ProjectForYp2.Model.Statys", "Statys")
+                    b.HasOne("ProjectForYp2.Model.Statys", "Id_Statys")
                         .WithMany()
-                        .HasForeignKey("StatysId")
+                        .HasForeignKey("Id_StatysId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ProjectForYp2.Model.User", "UserId")
+                    b.HasOne("ProjectForYp2.Model.User", "Master")
                         .WithMany()
-                        .HasForeignKey("UserIdId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MasterId");
 
-                    b.HasOne("ProjectForYp2.Model.User", "masterId")
-                        .WithMany()
-                        .HasForeignKey("masterIdId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Client");
 
                     b.Navigation("Id_OrgTechType");
 
-                    b.Navigation("Statys");
+                    b.Navigation("Id_Statys");
 
-                    b.Navigation("UserId");
-
-                    b.Navigation("masterId");
+                    b.Navigation("Master");
                 });
 
             modelBuilder.Entity("ProjectForYp2.Model.User", b =>

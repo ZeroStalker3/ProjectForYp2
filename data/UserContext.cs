@@ -15,6 +15,7 @@ namespace ProjectForYp2.data
         public DbSet<OrgTechType> OrgTechType { get; set; } = null!;
         public DbSet<Types> Types { get; set; } = null!;
         public DbSet<Statys> Statys { get; set; } = null!;
+        public DbSet<Comment> Comments { get; set; } = null!;
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

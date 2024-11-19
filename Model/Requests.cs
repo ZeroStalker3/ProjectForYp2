@@ -17,19 +17,24 @@ namespace ProjectForYp2.Model
         public string OrgTechModel { get; set; } = null!;
 
         [Column(TypeName = "nvarchar(50)")]
-        public string OrgTechNumber { get; set; } = null!;
+        public string? OrgTechNumber { get; set; } = null!;
 
         public Statys Id_Statys { get; set; } = null!;
 
         [Column(TypeName = "date")]
-        public DateOnly CompletionDate { get; set; }
+        public DateOnly? CompletionDate { get; set; }
 
         [Column(TypeName = "nvarchar(50)")]
-        public string RepairParts { get; set; } = null!;
-        public int? MasterId { get; set; }
-        public int? ClientId { get; set; }
-        public virtual User? Client { get; set; }
-        public virtual User? Master { get; set; }
+        public string? RepairParts { get; set; } = null!;
+ 
+
+
+        [ForeignKey("MasterId")]
+        public User? Master { get; set; }
+        
+        [ForeignKey("ClientId")]
+        public User Client { get; set; } = null!;
+
 
     }
 }

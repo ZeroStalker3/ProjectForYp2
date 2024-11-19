@@ -86,11 +86,11 @@ namespace ProjectForYp2.Migrations
                     OrgTechManufacture = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     OrgTechModel = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     OrgTechNumber = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    StatysId = table.Column<int>(type: "int", nullable: false),
+                    Id_StatysId = table.Column<int>(type: "int", nullable: false),
                     CompletionDate = table.Column<DateOnly>(type: "date", nullable: false),
                     RepairParts = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    masterIdId = table.Column<int>(type: "int", nullable: false),
-                    UserIdId = table.Column<int>(type: "int", nullable: false)
+                    MasterId = table.Column<int>(type: "int", nullable: true),
+                    ClientId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -102,24 +102,28 @@ namespace ProjectForYp2.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Requests_Statys_StatysId",
-                        column: x => x.StatysId,
+                        name: "FK_Requests_Statys_Id_StatysId",
+                        column: x => x.Id_StatysId,
                         principalTable: "Statys",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Requests_Users_UserIdId",
-                        column: x => x.UserIdId,
+                        name: "FK_Requests_Users_ClientId",
+                        column: x => x.ClientId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Requests_Users_masterIdId",
-                        column: x => x.masterIdId,
+                        name: "FK_Requests_Users_MasterId",
+                        column: x => x.MasterId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Requests_ClientId",
+                table: "Requests",
+                column: "ClientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Requests_Id_OrgTechTypeId",
@@ -127,19 +131,14 @@ namespace ProjectForYp2.Migrations
                 column: "Id_OrgTechTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Requests_masterIdId",
+                name: "IX_Requests_Id_StatysId",
                 table: "Requests",
-                column: "masterIdId");
+                column: "Id_StatysId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Requests_StatysId",
+                name: "IX_Requests_MasterId",
                 table: "Requests",
-                column: "StatysId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Requests_UserIdId",
-                table: "Requests",
-                column: "UserIdId");
+                column: "MasterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_TypeId",

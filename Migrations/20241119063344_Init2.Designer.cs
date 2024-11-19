@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectForYp2.data;
 
@@ -11,9 +12,11 @@ using ProjectForYp2.data;
 namespace ProjectForYp2.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20241119063344_Init2")]
+    partial class Init2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,7 +80,7 @@ namespace ProjectForYp2.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly?>("CompletionDate")
+                    b.Property<DateOnly>("CompletionDate")
                         .HasColumnType("date");
 
                     b.Property<int>("Id_OrgTechTypeId")
@@ -98,9 +101,11 @@ namespace ProjectForYp2.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("OrgTechNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("RepairParts")
+                        .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("StartDate")

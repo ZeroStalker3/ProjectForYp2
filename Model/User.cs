@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Azure.Core;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -28,7 +29,9 @@ namespace ProjectForYp2.Model
 
         [Column(TypeName = "nvarchar(50)")]
         public string Password { get; set; } = null!;
-        public Types Type { get; set; } = null!; 
+        public Types Type { get; set; } = null!;
+
+
 
     }
 }
