@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ProjectForYp2.Model;
 
 namespace ProjectForYp2.data
 {
@@ -24,6 +20,39 @@ namespace ProjectForYp2.data
             userContext.Requests.Load();
             userContext.Comments.Load();
             userContext.OrgTechType.Load();
+            userContext.Statys.Load();
+        }
+
+        private void databaseUpdate()
+        {
+            userContext.Users.Update();
+
+        }
+
+        // Метод для доступа 
+        public IEnumerable<User> GetUsers()
+        {
+            return userContext.Users.ToList();
+        }
+        public IEnumerable<Types> GetTypes()
+        {
+            return userContext.Types.ToList();
+        }
+        public IEnumerable<Requests> GetRequests()
+        {
+            return userContext.Requests.ToList();
+        }
+        public IEnumerable<Comment> GetComments()
+        {
+            return userContext.Comments.ToList();
+        }
+        public IEnumerable<OrgTechType> GetOrgTechType()
+        {
+            return userContext.OrgTechType.ToList();
+        }
+        public IEnumerable<Statys> GetStatys()
+        {
+            return userContext.Statys.ToList();
         }
     }
 }

@@ -11,20 +11,10 @@ namespace ProjectForYp2.pages
     /// </summary>
     public partial class PageLogin : Page
     {
-        internal readonly UserContext userContext;
-
+        classdata data = new classdata();
         public PageLogin()
         {
             InitializeComponent();
-            userContext = new UserContext();
-
-            databaseload();
-        }
-
-        void databaseload()
-        {
-            userContext.Users.Load();
-            userContext.Types.Load();
         }
 
         private void reg_Click(object sender, RoutedEventArgs e)
@@ -42,27 +32,8 @@ namespace ProjectForYp2.pages
             }
             else
             {
-                var result = userContext.Users.FirstOrDefault(u => u.Login == logiin && u.Password == pas);
-
-                //if (logiin == "login1")
-                //{
-                //    //FrameApp.frmObj
-                //}
-                //else if (logiin == "login2")
-                //{
-                //    MessageBox.Show("Вход произведен успешно", "Уведомление!", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                //}
-                //else if (logiin == "login4")
-                //{
-                //    MessageBox.Show("Вход произведен успешно", "Уведомление!", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                //}
-                //else if (logiin == "login11")
-                //{
-                //    MessageBox.Show("Вход произведен успешно", "Уведомление!", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                //}
+                var users = data.GetUsers();
+                var result = users.FirstOrDefault(u => u.Login == logiin && u.Password == pas);
 
                 if (result == null)
                 {
@@ -70,13 +41,15 @@ namespace ProjectForYp2.pages
                 }
                 else if (result != null)
                 {
-                    if(result.Type.Id == 1)
+                    if(result.Type.Id == 4)
                     {
                         MessageBox.Show("Вход произведен успешно", "Уведомление!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        FrameApp.frmObj.Navigate(new PageAddRequest(login.Text));
                     }
-                    else
+                    if (result.Type.Id == 3)
                     {
-                        MessageBox.Show("ЖОПА", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("Вход произведен успешно", "Уведомление!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        FrameApp.frmObj.Navigate(new PageEditRequest());
                     }
                 }
                 else

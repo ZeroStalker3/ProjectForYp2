@@ -22,5 +22,14 @@ namespace ProjectForYp2.data
         {
             optionsBuilder.UseSqlServer("Data Source=ZEROYZ; Initial Catalog=YP2; TrustServerCertificate = true; Integrated Security = true;");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<User>()
+                .HasKey(x => x.Id);
+            modelBuilder.Entity<Requests>().HasKey(x => x.Id);
+
+        }
     }
 }
