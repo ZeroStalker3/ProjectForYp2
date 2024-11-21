@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjectForYp2.Model
 {
-    internal class Types
+    class Types
     {
         public int Id { get; set; }
 

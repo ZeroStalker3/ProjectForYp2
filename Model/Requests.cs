@@ -2,7 +2,7 @@
 
 namespace ProjectForYp2.Model
 {
-    internal class Requests
+    class Requests
     {
         public int Id { get; set; }
 

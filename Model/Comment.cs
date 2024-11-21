@@ -2,7 +2,7 @@
 
 namespace ProjectForYp2.Model
 {
-    internal class Comment
+    class Comment
     {
         public int Id { get; set; }
         public string Message { get; set; } = null!;
