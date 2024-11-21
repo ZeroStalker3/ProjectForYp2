@@ -10,7 +10,7 @@ namespace ProjectForYp2.Model
         [ForeignKey ("MasterId")]
         public User? Master { get; set; }
 
-        [ForeignKey ("ClientId")]
-        public User? Client { get; set; }
+        [ForeignKey ("requestId")]
+        public Requests? reqId { get; set; }
     }
 }

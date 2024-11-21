@@ -35,7 +35,7 @@ namespace ProjectForYp2.pages.SecondPage
             data.GetUsers();
             var result = req.Where(x => x.Id == reqId).FirstOrDefault();
             var coment = data.GetComments();
-            var com = coment.Where(x => x.Id == reId).FirstOrDefault();
+            var com = coment.Where(x => x.Id == reId ).FirstOrDefault();
 
             if (com != null)
             { comment.Text = com.Message; }
@@ -43,7 +43,6 @@ namespace ProjectForYp2.pages.SecondPage
             {
                 comment.Text = "";   
             }
-
 
             cmbStatys.DisplayMemberPath = "Name";
             cmbStatys.SelectedValuePath = "Id";
@@ -58,7 +57,7 @@ namespace ProjectForYp2.pages.SecondPage
 
         private void edit_Click(object sender, RoutedEventArgs e)
         {
-            string status = Convert.ToString(cmbStatys.SelectedIndex);
+            string status = Convert.ToString(cmbStatys.SelectedValue);
             int emp = Convert.ToInt32(cmbEmployee.SelectedValue);
 
             var requestt = data.userContext.Requests.Find(reId);

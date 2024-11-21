@@ -51,6 +51,11 @@ namespace ProjectForYp2.pages
                         MessageBox.Show("Вход произведен успешно", "Уведомление!", MessageBoxButton.OK, MessageBoxImage.Information);
                         FrameApp.frmObj.Navigate(new PageEditRequest());
                     }
+                    if (result.Type.Id == 2)
+                    {
+                        MessageBox.Show("Вход произведен успешно", "Уведомление!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        FrameApp.frmObj.Navigate(new PageMaster(login.Text));
+                    }
                 }
                 else
                 {
