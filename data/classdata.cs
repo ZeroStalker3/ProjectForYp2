@@ -25,7 +25,7 @@ namespace ProjectForYp2.data
 
         private void databaseUpdate()
         {
-            userContext.Users.Update();
+            //userContext.Users.Update();
 
         }
 

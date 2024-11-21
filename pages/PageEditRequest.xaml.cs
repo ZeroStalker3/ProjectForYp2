@@ -58,14 +58,12 @@ namespace ProjectForYp2.pages
 
         private void upddate_Click(object sender, RoutedEventArgs e)
         {
-            data.GetRequests();
-            DataContext = data.userContext.Update(data.userContext.Requests);
-            //UserGrid.ItemsSource = DataContext;
+            FrameApp.frmObj.Navigate(new PageEditRequest());
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            FrameApp.frmObj.GoBack();
+            FrameApp.frmObj.Navigate(new PageLogin());
         }
 
         private void sort_Click(object sender, RoutedEventArgs e)

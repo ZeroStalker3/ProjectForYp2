@@ -1,4 +1,5 @@
 ﻿using Azure.Core;
+using Microsoft.EntityFrameworkCore;
 using ProjectForYp2.data;
 using ProjectForYp2.Model;
 using System;
@@ -33,6 +34,16 @@ namespace ProjectForYp2.pages.SecondPage
             data.GetStatys();
             data.GetUsers();
             var result = req.Where(x => x.Id == reqId).FirstOrDefault();
+            var coment = data.GetComments();
+            var com = coment.Where(x => x.Id == reId).FirstOrDefault();
+
+            if (com != null)
+            { comment.Text = com.Message; }
+            else
+            {
+                comment.Text = "";   
+            }
+
 
             cmbStatys.DisplayMemberPath = "Name";
             cmbStatys.SelectedValuePath = "Id";
@@ -50,30 +61,11 @@ namespace ProjectForYp2.pages.SecondPage
             string status = Convert.ToString(cmbStatys.SelectedIndex);
             int emp = Convert.ToInt32(cmbEmployee.SelectedValue);
 
-            //foreach (var item in cmbStatys.Items)
-            //{
-            //    cmbStatys.SelectedItem = item;
-            //    if (status == (string)cmbStatys.Text)
-            //    {
-            //        break;
-            //    }
-            //}
-
-            //foreach (var item in cmbEmployee.Items)
-            //{
-            //    cmbEmployee.SelectedItem = item;
-            //    if (emp == (string)cmbEmployee.Text)
-            //    {
-            //        break;
-            //    }
-            //}
             var requestt = data.userContext.Requests.Find(reId);
-
             requestt.RepairParts = descriptionTxt.Text;
             requestt.Master = data.GetUsers().Where(x => x.Id == emp).FirstOrDefault(); ;
-            data.userContext.SaveChangesAsync();
-            //data.userContext.SaveChanges();
-            data.userContext.Update();
+            data.userContext.Update(requestt);
+            data.userContext.SaveChanges();
         }
 
         private void cancel_Click(object sender, RoutedEventArgs e)

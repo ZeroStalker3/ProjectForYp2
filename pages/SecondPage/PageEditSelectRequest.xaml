@@ -20,6 +20,8 @@
             <TextBlock
                 Height="40" Text="Ответсвенный за работу:" FontSize="16pt" VerticalAlignment="Center" Margin="0 0 0 10"/>
             <ComboBox Height="40" Margin="0 0 0 10" FontSize="18" x:Name="cmbEmployee"/>
+            <TextBlock Height="40" Text="Комментарий мастера" FontSize="16pt"  Margin="0  0 0 10"/>
+            <TextBlock Height="40" FontSize="18" x:Name="comment" Margin="0  0 0 10"/>
         </StackPanel>
         <DockPanel VerticalAlignment="Bottom" Margin="5 0 5 10">
             <Button x:Name="edit" Content="Сохранить" Height="40" Width="150" Click="edit_Click"/>

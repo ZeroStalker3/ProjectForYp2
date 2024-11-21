@@ -29,7 +29,7 @@
                 <DataGridTextColumn Binding="{Binding OrgTechNumber}" Header="Серийный номер" FontSize="14" Width="*"/>
                 <DataGridTextColumn Binding="{Binding Id_Statys.Name}" Header="Статус" FontSize="14" Width="*"/>
                 <DataGridTextColumn Binding="{Binding Master.FirstName}" Header="Мастер" FontSize="14" Width="*"/>
-                <DataGridTextColumn Binding="{Binding RepairParts}" Header="Примечание" FontSize="14" Width="*"/>
+                <DataGridTextColumn Binding="{Binding RepairParts}" Header="Детали" FontSize="14" Width="*"/>
                 <DataGridTextColumn Binding="{Binding StartDate}" Header="Дата приема" FontSize="14" Width="*"/>
                 <DataGridTextColumn Binding="{Binding CompletionDate}" Header="Дата завершения" FontSize="14" Width="*"/>
                 <DataGridTemplateColumn Width="*">
@@ -47,7 +47,7 @@
         <Button Grid.Column="1" Width="130" Margin="10 0 10 0" Name="sort" Click="sort_Click"
                 Content="Сортировать" VerticalAlignment="Center" HorizontalAlignment="Left"
                 FontSize="15pt"/>
-        <Button Grid.Column="1" Grid.Row="0" Content="Назад" FontSize="15pt" Width="130"
+        <Button Grid.Column="1" Grid.Row="0" Content="Выход" FontSize="15pt" Width="130"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Right" Margin="10 0 10 0" Name="Back" Click="Back_Click"/>
     </Grid>
