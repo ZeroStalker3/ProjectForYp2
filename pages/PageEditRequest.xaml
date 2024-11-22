@@ -24,10 +24,16 @@
             Grid.Column="0" Grid.RowSpan="3" x:Name="UserGrid" FontSize="15" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" Header="Номер заявки" FontSize="14" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Id_OrgTechType.Name}" Header="Тип оборудования" Width="*" FontSize="14"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding OrgTechManufacture}" Header="Производитель" FontSize="14" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding OrgTechModel}" Header="Модель" FontSize="14" Width="*"/>
-                <DataGridTextColumn Binding="{Binding OrgTechNumber}" Header="Серийный номер" FontSize="14" Width="*"/>
+                <DataGridTextColumn FontSize="14" Width="*" Header="Оборудование">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0} {1} {2}">
+                            <Binding Path="Id_OrgTechType.Name" />
+                            <Binding Path="OrgTechManufacture" />
+                            <Binding Path="OrgTechModel" />
+                            <Binding Path="OrgTechNumber" />
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Id_Statys.Name}" Header="Статус" FontSize="14" Width="*"/>
                 <DataGridTextColumn FontSize="14" Width="*" Header="Мастер">
                     <DataGridTextColumn.Binding>
@@ -45,6 +51,18 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button x:Name="edit" FontSize="18" Click="edit_Click" Content="Изменить"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button 
+                                        Name="Edit" 
+                                        Click="Edit_Click_1" 
+                                        Height="30" 
+                                        Width="120"
+                                        Content="Посмотреть сводку"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

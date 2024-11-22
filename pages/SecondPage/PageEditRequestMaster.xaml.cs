@@ -27,10 +27,14 @@ namespace ProjectForYp2.pages.SecondPage
         public PageEditRequestMaster(int reqId)
         {
             InitializeComponent(); 
+
             var req = data.GetRequests();
             reId = reqId;
             data.GetStatys();
             data.GetUsers();
+            cmbStatys.DisplayMemberPath = "Name";
+            cmbStatys.SelectedValuePath = "Id";
+            cmbStatys.ItemsSource = data.userContext.Statys.ToList();
             var result = req.Where(x => x.Id == reqId).FirstOrDefault();
             var comment = data.GetComments();
             var com = comment.Where(x => x.Id == reId).FirstOrDefault();
@@ -40,6 +44,7 @@ namespace ProjectForYp2.pages.SecondPage
             {
                 coment.Text = "";
             }
+            reId = result.Id;
             cmbStatys.Text = result.Id_Statys.Name;
             descriptionTxt.Text = result.RepairParts;
             cmbEmployee.Text = result.Master.Name + " "
@@ -53,19 +58,32 @@ namespace ProjectForYp2.pages.SecondPage
             data.GetComments();
             var requestt = data.userContext.Requests.Find(reId);
             requestt.RepairParts = descriptionTxt.Text;
-            requestt.Master = data.GetUsers().Where(x => x.Id == reId).FirstOrDefault();
+            //requestt.Master = data.GetUsers().Where(x => x.Id == reId).FirstOrDefault();
             requestt.RepairParts = descriptionTxt.Text;
-
+            var req = data.GetRequests(); 
+            var status = data.GetStatys();
             Comment comment = new Comment()
             {
                 Message = coment.Text,
-                Master = data.GetUsers().Where(x => x.Id == reId).FirstOrDefault(),
-                //reqId = 
+                Master = requestt.Master,
+                reqId = req.Where(x => x.Id == reId).FirstOrDefault()
                 //type.Where(x => x.Id == Convert.ToInt32(cmbTechType.SelectedValue)).FirstOrDefault(),
             };
-
-            data.userContext.Update(requestt);
-            data.userContext.SaveChanges();
+            if ((int)cmbStatys.SelectedValue == 2)
+            {
+                requestt.Id_Statys = status.Where(x => x.Name == "Готова к выдаче").FirstOrDefault();
+                var date = DateTime.Now;
+                requestt.CompletionDate = DateOnly.FromDateTime(DateTime.Now);
+                data.userContext.Update(comment);
+                data.userContext.Update(requestt);
+                data.userContext.SaveChanges();
+            }
+            else
+            {
+                data.userContext.Update(requestt); 
+                data.userContext.Update(comment);
+                data.userContext.SaveChanges();
+            }
         }
 
         private void cancel_Click(object sender, RoutedEventArgs e)

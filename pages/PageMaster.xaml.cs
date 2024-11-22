@@ -37,8 +37,12 @@ namespace ProjectForYp2.pages
             data.GetUsers();
             login = log;
             var user =  data.userContext.Users.Where(u => u.Login == login).FirstOrDefault();
-            UserGrid.ItemsSource = data.userContext.Requests.Where(r => r.Master.Id == user.Id).ToList();
+            UserGrid.ItemsSource = data.userContext.Requests.Where(r => r.Master.Id == user.Id &&
+            r.Id_Statys.Name == "В процессе ремонта" ||
+            r.Id_Statys.Name == "Новая заявка").ToList();
 
+            UserGridCompletion.ItemsSource = data.userContext.Requests.Where(r => r.Master.Id == user.Id &&
+                        r.Id_Statys.Name == "Готова к выдаче").ToList();
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
@@ -71,7 +75,9 @@ namespace ProjectForYp2.pages
             var user = data.userContext.Users.Where(u => u.Login == login).FirstOrDefault();
             string select = Convert.ToString(sort.Text.ToUpper());
             UserGrid.ItemsSource = data.userContext.Requests.Where(x =>
-            x.OrgTechManufacture.ToUpper().Contains(select) && x.Master.Id == user.Id)
+            x.OrgTechManufacture.ToUpper().Contains(select) && x.Master.Id == user.Id
+            && (x.Id_Statys.Name == "В процессе ремонта" ||
+            x.Id_Statys.Name == "Новая заявка"))
                 .ToList();
         }
     }

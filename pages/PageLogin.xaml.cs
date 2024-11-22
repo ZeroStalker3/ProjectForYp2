@@ -46,7 +46,7 @@ namespace ProjectForYp2.pages
                         MessageBox.Show("Вход произведен успешно", "Уведомление!", MessageBoxButton.OK, MessageBoxImage.Information);
                         FrameApp.frmObj.Navigate(new PageAddRequest(login.Text));
                     }
-                    if (result.Type.Id == 3)
+                    if (result.Type.Id == 3 || result.Type.Id == 1)
                     {
                         MessageBox.Show("Вход произведен успешно", "Уведомление!", MessageBoxButton.OK, MessageBoxImage.Information);
                         FrameApp.frmObj.Navigate(new PageEditRequest());
