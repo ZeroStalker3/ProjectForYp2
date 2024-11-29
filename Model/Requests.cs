@@ -6,7 +6,7 @@ namespace ProjectForYp2.Model
     {
         public int Id { get; set; }
 
-        [Column(TypeName = "nvarchar(50)")]
+        [Column(TypeName = "date")]
         public DateOnly StartDate { get; set; }
         public OrgTechType Id_OrgTechType { get; set; } = null!;
 
