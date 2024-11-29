@@ -12,7 +12,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="9*"/>
-            <RowDefinition Height="136*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="76*"/>
             <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -21,7 +22,7 @@
         </Grid.ColumnDefinitions>
         <DataGrid
             IsReadOnly="True"
-            Grid.Column="0" Grid.RowSpan="3" x:Name="UserGrid" FontSize="15" AutoGenerateColumns="False">
+            Grid.Column="0" Grid.RowSpan="2" x:Name="UserGrid" FontSize="15" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" Header="Номер заявки" FontSize="14" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Id_OrgTechType.Name}" Header="Тип оборудования" Width="*" FontSize="14"></DataGridTextColumn>
@@ -29,15 +30,6 @@
                 <DataGridTextColumn Binding="{Binding OrgTechModel}" Header="Модель" FontSize="14" Width="*"/>
                 <DataGridTextColumn Binding="{Binding OrgTechNumber}" Header="Серийный номер" FontSize="14" Width="*"/>
                 <DataGridTextColumn Binding="{Binding Id_Statys.Name}" Header="Статус" FontSize="14" Width="*"/>
-                <DataGridTextColumn FontSize="14" Width="*" Header="Мастер">
-                    <DataGridTextColumn.Binding>
-                        <MultiBinding StringFormat="{}{0} {1} {2}">
-                            <Binding Path="Master.Name" />
-                            <Binding Path="Master.FirstName" />
-                            <Binding Path="Master.LastName" />
-                        </MultiBinding>
-                    </DataGridTextColumn.Binding>
-                </DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding RepairParts}" Header="Детали" FontSize="14" Width="*"/>
                 <DataGridTextColumn Binding="{Binding StartDate}" Header="Дата приема" FontSize="14" Width="*"/>
                 <DataGridTextColumn Binding="{Binding CompletionDate}" Header="Дата завершения" FontSize="14" Width="*"/>
@@ -51,12 +43,35 @@
             </DataGrid.Columns>
         </DataGrid>
         <Frame Grid.Column="1" x:Name="Frmedit" NavigationUIVisibility="Hidden" Grid.RowSpan="3" Grid.Row="1"/>
-        <Button Height="40" Width="150" x:Name="upddate" Click="upddate_Click" Content="Обновить" Grid.Row="2"
+        <Button Height="40" Width="150" x:Name="upddate" Click="upddate_Click" Content="Обновить" Grid.Row="3"
                 HorizontalAlignment="Left" VerticalAlignment="Center" Margin="1000,0,0,0"/>
-        <TextBox Grid.Column="1" Width="130" Margin="10 0 10 0" Name="sort"
-                 VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15pt" SelectionChanged="sort_SelectionChanged"/>
-        <Button Grid.Column="1" Grid.Row="0" Content="Выход" FontSize="15pt" Width="130"
+        <TextBox Grid.Column="1" Width="190" Margin="10,0,0,0" Name="sort"
+                 VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15pt" 
+                 SelectionChanged="sort_SelectionChanged" Height="29"/>
+        <Button Grid.Column="1" Content="Выход" FontSize="15pt" Width="160"
                 VerticalAlignment="Center"
-                HorizontalAlignment="Right" Margin="10 0 10 0" Name="Back" Click="Back_Click"/>
+                HorizontalAlignment="Left" Margin="300,0,0,0" Name="Back" Click="Back_Click" Height="31"/>
+
+        <DataGrid
+            IsReadOnly="True"
+            Grid.Column="0" Grid.RowSpan="3" Grid.Row="2" x:Name="UserGridCompletion" FontSize="15" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="Номер заявки" FontSize="14" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn FontSize="14" Width="*" Header="Оборудование">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0} {1} {2}">
+                            <Binding Path="Id_OrgTechType.Name" />
+                            <Binding Path="OrgTechManufacture" />
+                            <Binding Path="OrgTechModel" />
+                            <Binding Path="OrgTechNumber" />
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Id_Statys.Name}" Header="Статус" FontSize="14" Width="*"/>
+                <DataGridTextColumn Binding="{Binding RepairParts}" Header="Детали" FontSize="14" Width="*"/>
+                <DataGridTextColumn Binding="{Binding StartDate}" Header="Дата приема" FontSize="14" Width="*"/>
+                <DataGridTextColumn Binding="{Binding CompletionDate}" Header="Дата завершения" FontSize="14" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

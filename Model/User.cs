@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProjectForYp2.Model
 {
-    internal class User
+    class User
     {
         public int Id { get; set; }
 
@@ -30,8 +30,5 @@ namespace ProjectForYp2.Model
         [Column(TypeName = "nvarchar(50)")]
         public string Password { get; set; } = null!;
         public Types Type { get; set; } = null!;
-
-
-
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjectForYp2.Model
 {
-    internal class OrgTechType
+    class OrgTechType
     {
         public int Id { get; set; }
         [Column (TypeName = "nvarchar(50)")]

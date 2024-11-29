@@ -32,12 +32,17 @@ namespace ProjectForYp2.pages
         public PageMaster(string log)
         {
             InitializeComponent();
-            
+
+            EditFrame.frmEdit = Frmedit;
             data.GetUsers();
             login = log;
             var user =  data.userContext.Users.Where(u => u.Login == login).FirstOrDefault();
-            UserGrid.ItemsSource = data.userContext.Requests.Where(r => r.Master.Id == user.Id).ToList();
+            UserGrid.ItemsSource = data.userContext.Requests.Where(r => r.Master.Id == user.Id &&
+            r.Id_Statys.Name == "В процессе ремонта" ||
+            r.Id_Statys.Name == "Новая заявка").ToList();
 
+            UserGridCompletion.ItemsSource = data.userContext.Requests.Where(r => r.Master.Id == user.Id &&
+                        r.Id_Statys.Name == "Готова к выдаче").ToList();
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
@@ -49,7 +54,7 @@ namespace ProjectForYp2.pages
         {
             var req = (sender as Button).DataContext;
 
-            foreach (var item in data.userContext.Requests.Local)
+            foreach (var item in data.userContext.Requests)
             {
                 if (item == req)
                 {
@@ -64,12 +69,18 @@ namespace ProjectForYp2.pages
         {
             FrameApp.frmObj.Navigate(new PageMaster(login));
         }
-
+            
         private void sort_SelectionChanged(object sender, RoutedEventArgs e)
         {
             var user = data.userContext.Users.Where(u => u.Login == login).FirstOrDefault();
             string select = Convert.ToString(sort.Text.ToUpper());
-            UserGrid.ItemsSource = data.userContext.Requests.Local.Where(x => x.OrgTechManufacture.ToUpper().Contains(select)/* && x.Master.Id == user.Id*/).ToList();
+            UserGrid.ItemsSource = data.userContext.Requests.Where(x =>
+            x.OrgTechManufacture.ToUpper().Contains(select) && x.Master.Id == user.Id
+            && (x.Id_Statys.Name == "В процессе ремонта" ||
+            x.Id_Statys.Name == "Новая заявка"))
+                .ToList();
         }
     }
 }
+//System.NullReferenceException: "Object reference not set to an instance of an object."
+//ProjectForYp2.Model.Requests.Master.get вернул null.
