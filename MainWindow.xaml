@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterOwner"
         WindowState="Maximized"
         MinHeight="600" MinWidth="1200"
-        Title="Главное окно" Height="800" Width="1600">
+        Title="Сервисный центр IT-Сan" Height="800" Width="1600">
     <Grid>
         <Frame 
             x:Name="MainFrm" 

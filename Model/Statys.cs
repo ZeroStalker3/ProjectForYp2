@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjectForYp2.Model
 {
-    internal class Statys
+    class Statys
     {
         public int Id { get; set; }
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProjectForYp2.data
 {
-    internal class UserContext : DbContext
+    class UserContext : DbContext
     {
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Requests> Requests { get; set; } = null!;

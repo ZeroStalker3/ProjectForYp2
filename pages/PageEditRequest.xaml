@@ -12,8 +12,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="9*"/>
-            <RowDefinition Height="136*"/>
-            <RowDefinition Height="15*"/>
+            <RowDefinition Height="121*"/>
+            <RowDefinition Height="30*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="29*"/>
@@ -24,10 +24,16 @@
             Grid.Column="0" Grid.RowSpan="3" x:Name="UserGrid" FontSize="15" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" Header="Номер заявки" FontSize="14" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Id_OrgTechType.Name}" Header="Тип оборудования" Width="*" FontSize="14"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding OrgTechManufacture}" Header="Производитель" FontSize="14" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding OrgTechModel}" Header="Модель" FontSize="14" Width="*"/>
-                <DataGridTextColumn Binding="{Binding OrgTechNumber}" Header="Серийный номер" FontSize="14" Width="*"/>
+                <DataGridTextColumn FontSize="14" Width="*" Header="Оборудование">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0} {1} {2}">
+                            <Binding Path="Id_OrgTechType.Name" />
+                            <Binding Path="OrgTechManufacture" />
+                            <Binding Path="OrgTechModel" />
+                            <Binding Path="OrgTechNumber" />
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Id_Statys.Name}" Header="Статус" FontSize="14" Width="*"/>
                 <DataGridTextColumn FontSize="14" Width="*" Header="Мастер">
                     <DataGridTextColumn.Binding>
@@ -48,16 +54,38 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button 
+                                        Name="Edit" 
+                                        Click="Edit_Click_1" 
+                                        Height="30" 
+                                        Width="120"
+                                        Content="Посмотреть сводку"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Frame Grid.Column="1" x:Name="Frmedit" NavigationUIVisibility="Hidden" Grid.RowSpan="3" Grid.Row="1"/>
+        <Frame Grid.Column="1" x:Name="Frmedit" NavigationUIVisibility="Hidden" Grid.RowSpan="2" Grid.Row="1"/>
         <Button Height="40" Width="150" x:Name="upddate" Click="upddate_Click" Content="Обновить" Grid.Row="2"
-                HorizontalAlignment="Left" VerticalAlignment="Center" Margin="1000,0,0,0"/>
-        <Button Grid.Column="1" Width="130" Margin="10 0 10 0" Name="sort" Click="sort_Click"
+                HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10"/>
+        <StackPanel Grid.Column="1" Orientation="Horizontal" Height="40" >
+            <Button Grid.Column="1" Width="130" Margin="5" Name="sort" Click="sort_Click"
                 Content="Сортировать" VerticalAlignment="Center" HorizontalAlignment="Left"
-                FontSize="15pt"/>
-        <Button Grid.Column="1" Grid.Row="0" Content="Выход" FontSize="15pt" Width="130"
+                FontSize="15pt" Height="31"/>
+            <TextBox Grid.Column="1" Width="190" Margin="5" Name="sort1"
+                 VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13pt" 
+                 SelectionChanged="sort1_SelectionChanged" Height="30"/>
+        </StackPanel>
+        <Button Grid.Column="1" Content="Выход" FontSize="15pt" Width="70"
                 VerticalAlignment="Center"
-                HorizontalAlignment="Right" Margin="10 0 10 0" Name="Back" Click="Back_Click"/>
+                HorizontalAlignment="Right" Margin="5" Name="Back" Click="Back_Click" Height="31"/>
+        <StackPanel Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10">
+            <TextBlock Text="Выполнено: " x:Name="welldonereq" FontSize="18"  Margin="5"/>
+            <TextBlock Text="В работе: " x:Name="workreq" FontSize="18" Margin="5"/>
+            <TextBlock Text="Новая заявка: " x:Name="newreq" FontSize="18" Margin="5"/>
+        </StackPanel>
     </Grid>
 </Page>

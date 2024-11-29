@@ -2,11 +2,11 @@
 
 namespace ProjectForYp2.Model
 {
-    internal class Requests
+    class Requests
     {
         public int Id { get; set; }
 
-        [Column(TypeName = "nvarchar(50)")]
+        [Column(TypeName = "date")]
         public DateOnly StartDate { get; set; }
         public OrgTechType Id_OrgTechType { get; set; } = null!;
 
